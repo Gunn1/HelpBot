@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const prefix = botSettings.prefix;
 favemoji = null;
 const bot = new Discord.Client();
+const { Client, Attachment } = require('discord.js');
 //This Is called with !staff and Starts a Thread
 const helpEmbed = new Discord.RichEmbed()
 .setColor('#0099ff')
@@ -55,8 +56,8 @@ bot.on("message", async message => {
     }
 
 	if (command === `${prefix}avatar`) {
-			message.reply('Getting your avatar ' + msg.author)
-    		message.reply(msg.author.avatarURL);
+			message.reply('Getting your avatar ' + message.author)
+    		message.reply(message.author.avatarURL);
     	}
 
 	if(command === `${prefix}help`) {
