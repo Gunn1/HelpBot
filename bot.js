@@ -94,6 +94,14 @@ bot.on("message", async message => {
     clear();
     }
 
+    if(command === `${prefix}plan`) {
+    	const planEmbed = new Discord.RichEmbed()
+		.setColor('#0099ff')
+		.setTitle("Plan's For Upcoming Updates")
+		.setDescription('Plans')
+		.addField("I am Planning on add a Mute To admins can mute people from !staff")
+		.setTimestamp();
+    }
 
 
 	if(command === `${prefix}staff`) {
