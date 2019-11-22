@@ -33,6 +33,7 @@ bot.on("message", async message => {
 	let messageArray = message.content.split(" ");
 	let command = messageArray[0];
 	args = messageArray.slice(1);
+	let num = messageArray[1];
 
 	if(!command.startsWith(prefix)) return;
 
@@ -64,10 +65,36 @@ bot.on("message", async message => {
 		let helpmessage = new Discord.RichEmbed()
 			.setAuthor(message.author.username)
 			.addField("!userinfo", `Will display your name ${message.author.username}`)
-			.addField("!staff", `Will Start A Thread Note: Still is in the dev stag`)
+			.addField("!staff", `Will Start A Thread`)
 			.setTimestamp();
 		message.channel.send(helpmessage);
 	}
+    	if (command === `${prefix}purge`) {
+        //Deletes 100 messages
+         async function purge() {
+            if (message.member.roles.find(r => r.name === "Admin") || message.member.roles.find(r => r.name === "Owner")) {
+           	message.delete();
+            const fetched = await message.channel.fetchMessages({limit: 100});
+            message.channel.bulkDelete(fetched);
+     
+        }
+      }
+        purge();
+    }
+    	if (command == `${prefix}remove`) {
+        async function clear() {
+        if (message.member.roles.find(r => r.name === "Admin") || message.member.roles.find(r => r.name === "Owner")) { 
+            message.delete();
+            const fetched = await message.channel.fetchMessages({limit: num});
+            message.channel.bulkDelete(fetched);
+            bot.channels.get("641442259417563138").send(num + " Messages Have Been Deleted By " + message.author)
+        }
+    }
+
+    clear();
+    }
+
+
 
 	if(command === `${prefix}staff`) {
 		message.react('✅');
