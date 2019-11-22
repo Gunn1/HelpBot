@@ -46,6 +46,19 @@ bot.on("message", async message => {
 			.setTimestamp();
 	message.channel.send(embed);
 }
+
+	if (command === `${prefix}rip`) {
+        // Create the attachment using Attachment
+        const attachment = new Attachment('https://i.imgur.com/w3duR07.png');
+        // Send the attachment in the message channel
+        message.channel.send(attachment);
+    }
+
+	if (command === `${prefix}avatar`) {
+			message.reply('Getting your avatar ' + msg.author)
+    		message.reply(msg.author.avatarURL);
+    	}
+
 	if(command === `${prefix}help`) {
 		let helpmessage = new Discord.RichEmbed()
 			.setAuthor(message.author.username)
