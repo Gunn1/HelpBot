@@ -101,6 +101,7 @@ bot.on("message", async message => {
 		.setDescription('Plans')
 		.addField("I am Planning on add a Mute To admins can mute people from !staff")
 		.setTimestamp();
+		message.channel.send(planEmbed);
     }
 
 
