@@ -119,7 +119,7 @@ bot.on("message", async message => {
 		.setColor('#0099ff')
 		.setTitle("Plan's For Upcoming Updates")
 		.setDescription('Plans')
-		.addField("I am Planning on add a Mute To admins can mute people from !staff")
+		.addField("I am Planning on add a Mute To admins can mute people from !staff" , "More Comeing Soon!")
 		.setTimestamp();
 		message.channel.send(planEmbed);
     }
