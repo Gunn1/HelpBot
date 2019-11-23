@@ -18,7 +18,10 @@ const noEmbed = new Discord.RichEmbed()
 .setDescription('Thread Has Been Closed')
 .setTimestamp()
 .setFooter('To Open a new Thread Say !help', 'https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1024px-Flag_of_Germany.svg.png');
-
+//This Makes A random number!
+function randomInt(low, high) {
+  return Math.floor(Math.random() * (high - low) + low)
+}
 bot.on("ready", async () => {
 	console.log(`Bot is ready! ${bot.user.username}`);
 try {
@@ -63,9 +66,13 @@ bot.on("message", async message => {
 
 	if(command === `${prefix}help`) {
 		let helpmessage = new Discord.RichEmbed()
-			.setAuthor(message.author.username)
+			.setAuthor("Help")
 			.addField("!userinfo", `Will display your name ${message.author.username}`)
 			.addField("!staff", `Will Start A Thread`)
+			.addField("!rip", "will display rip")
+			.addField("!avatar", "Will display avatar")
+			.addField("!catfact", "Will display Fish fact")
+			.addField("!dogfact", "Will display Cat fact")
 			.setTimestamp();
 		message.channel.send(helpmessage);
 	}
@@ -94,6 +101,18 @@ bot.on("message", async message => {
     clear();
     }
 
+    if(command === `${prefix}dogfact`) {
+		let i = randomInt(0, 10);
+    	message.channel.send(botSettings.Catfacts[i]);
+    }
+    if(command ===`${prefix}catfact`) {
+
+   		let i = randomInt(0, 12);
+   		message.channel.send(botSettings.dogfact[i])
+    }
+    if(command === `${prefix}cow`){
+    	message.channel.send("https://giphy.com/gifs/dojacat-doja-cat-mooo-RJhasN5Konz6an51Vs")
+    }
     if(command === `${prefix}plan`) {
     	const planEmbed = new Discord.RichEmbed()
 		.setColor('#0099ff')
