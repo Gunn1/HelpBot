@@ -32,7 +32,11 @@ try {
 }
 });
 bot.on("message", async message => {
-
+if (message.member.roles.find(r => r.name === "Mute")) {
+	message.delete();
+	message.author.send("Sorry You have been muted from chat")
+}
+if (message.member.roles.find(r => r.name === "Mute")) return;
 	let messageArray = message.content.split(" ");
 	let command = messageArray[0];
 	args = messageArray.slice(1);
