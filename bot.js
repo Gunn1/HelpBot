@@ -111,7 +111,8 @@ bot.on("message", async message => {
    		message.channel.send(botSettings.dogfact[i])
     }
     if(command === `${prefix}cow`){
-    	message.channel.send("https://giphy.com/gifs/dojacat-doja-cat-mooo-RJhasN5Konz6an51Vs")
+    	message.delete();
+    	message.channel.send("https://giphy.com/gifs/dojacat-doja-cat-mooo-RJhasN5Konz6an51Vs");
     }
     if(command === `${prefix}plan`) {
     	const planEmbed = new Discord.RichEmbed()
