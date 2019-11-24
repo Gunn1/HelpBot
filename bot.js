@@ -123,7 +123,7 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
 		.setColor('#0099ff')
 		.setTitle("Plan's For Upcoming Updates")
 		.setDescription('Plans')
-		.addField("I am Planning on add a Mute To admins can mute people from !staff" , "More Comeing Soon!")
+		.addField("Planning on adding !suggest" , "More Comeing Soon!")
 		.setTimestamp();
 		message.channel.send(planEmbed);
     }
