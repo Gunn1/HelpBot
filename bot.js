@@ -159,7 +159,7 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
             const remove = new Discord.RichEmbed()
             .setColor('#0099ff')
             .setAuthor(` ${message.author.username}`, `${authoravatar}`)
-            .setTitle(`✅ Successfully purged ${num} messages.`)
+            .setTitle(`✅ Successfully removed ${num} messages.`)
             message.channel.send(remove);
         }
     }
