@@ -70,9 +70,13 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
     }
 
 	if (command === `${prefix}avatar`) {
-			message.reply('Getting your avatar ' + message.author)
-    		message.reply(message.author.avatarURL);
+    if(message.author.avatarURL === null) {
+      message.reply("Sorry you do not have a avatar please set one");
+    }
+    else {
+    		message.reply(`This is your avatar ${message.author.avatarURL}`);
     	}
+    }
 
 	if(command === `${prefix}help`) {
 		let helpmessage = new Discord.RichEmbed()
