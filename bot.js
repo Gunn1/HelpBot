@@ -1,4 +1,5 @@
 const botSettings = require("./botsettings.json");
+const list = require("./lists.json");
 const Discord = require("discord.js");
 const prefix = botSettings.prefix;
 favemoji = null;
@@ -41,6 +42,7 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
 	let command = messageArray[0];
 	args = messageArray.slice(1);
 	let num = messageArray[1];
+  let tran = messageArray.slice(0);
   if(command === "fat") {
     message.channel.send("Your going to be ban if you type that");  
     
@@ -171,14 +173,37 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
     clear();
     }
 
+    /*if(command === `${prefix}translate`) {
+      //if (tran === germanword) {
+        const translateembed = new Discord.RichEmbed()
+      .setColor('#0099ff')
+      .setTitle('Thread Created')
+      .setDescription('Our Staff Team Will Get Back To You As Soon As Possible')
+      .setTimestamp()
+      .setFooter('To Close Thread Push The Lock Button', 'https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1024px-Flag_of_Germany.svg.png');
+      message.channel.send(translateembed);
+      //}
+    }*/
+
     if(command === `${prefix}dogfact`) {
 		let i = randomInt(0, 10);
-    	message.channel.send(botSettings.Catfacts[i]);
+    const dogembed = new Discord.RichEmbed()
+    .setColor('#0099ff')
+    .setTitle('Dog Fact')
+    .setDescription(list.catfact[i])
+    .setTimestamp()
+    .setFooter('Generator Made By ShadowGunn', 'https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1024px-Flag_of_Germany.svg.png');
+  message.channel.send(dogembed);
     }
     if(command ===`${prefix}catfact`) {
-
-   		let i = randomInt(0, 12);
-   		message.channel.send(botSettings.dogfact[i])
+   	let i = randomInt(0, 12);
+    const catembed = new Discord.RichEmbed()
+    .setColor('#0099ff')
+    .setTitle('Cat Fact')
+    .setDescription(list.dogfact[i])
+    .setTimestamp()
+    .setFooter('Generator Made By ShadowGunn', 'https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1024px-Flag_of_Germany.svg.png');
+  message.channel.send(catembed);
     }
     if(command === `${prefix}cow`){
     	message.delete();
