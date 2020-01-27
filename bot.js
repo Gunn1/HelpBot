@@ -73,7 +73,7 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
   }
 
   if (message.content != `${prefix}${list.addwords}` && justprefix == false) {
-    message.channel.send("That is not a valid Command");
+    message.channel.send("That is not a valid Command Please Do !help for a list of commands");
     return;
 }
   //this will print out rip
