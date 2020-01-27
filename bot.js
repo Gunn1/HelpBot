@@ -43,15 +43,17 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
 	args = messageArray.slice(1);
 	let num = messageArray[1];
   let tran = messageArray.slice(0);
-  if(command === "fat") {
-    message.channel.send("Your going to be ban if you type that");  
+  // This is so you can create a filter
+  /*if (message.content.includes("Enter Your Word Here")) {
+    message.delete();
+    message.channel.send("Please do not say that");  
     
-  }
+  }*/
 
 
-
+  //this will make your code stop if it does not have a prifix
 	if(!command.startsWith(prefix)) return;
-
+  //This will print out the users info
 	if(command === `${prefix}userinfo`) {
 		let embed = new Discord.RichEmbed()
 			.setAuthor(message.author.username)
@@ -63,23 +65,37 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
 			.setTimestamp();
 	message.channel.send(embed);
 }
+  justprefix = false;
 
+  if (message.content == prefix) {
+    message.channel.send("Please Enter A Command");
+    justprefix = true;
+  }
+
+  if (message.content != `${prefix}${list.addwords}` && justprefix == false) {
+    message.channel.send("That is not a valid Command");
+    return;
+}
+  //this will print out rip
 	if (command === `${prefix}rip`) {
         // Create the attachment using Attachment
         const attachment = new Attachment('https://i.imgur.com/w3duR07.png');
         // Send the attachment in the message channel
         message.channel.send(attachment);
     }
-
+    // This will run if !avatar is entered 
 	if (command === `${prefix}avatar`) {
+    // This will check to see if you have a avatar and run if you do
     if(message.author.avatarURL === null) {
+      //This will send That you do not have a avatar
       message.reply("Sorry you do not have a avatar please set one");
     }
     else {
+        // This will send the avatar to your channel
     		message.reply(`This is your avatar ${message.author.avatarURL}`);
     	}
     }
-
+    //This will Give you a help embed
 	if(command === `${prefix}help`) {
 		let helpmessage = new Discord.RichEmbed()
 			.setAuthor("Help")
@@ -92,22 +108,26 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
 			.setTimestamp();
 		message.channel.send(helpmessage);
 	}
+      // this will delete 100
     	if (command === `${prefix}purge`) {
         //Deletes 100 messages
          async function purge() {
+            //This will check to see if you have a Admin Or Owner and if you do it will run the code in the {}
             if (message.member.roles.find(r => r.name === "Admin") || message.member.roles.find(r => r.name === "Owner")) {
-           	message.delete();
+            //This gets all the messages in the channel
             const fetched = await message.channel.fetchMessages({limit: 100});
             message.channel.bulkDelete(fetched);
      
         }
       }
+      //This runs the function Purge()
         purge();
     }
 
     //This Will Ban users
 // if the message content starts with "!ban"
-  if (message.content.startsWith('!ban')) {
+  if (message.content.startsWith(`${prefix}ban`)) {
+    //This will check if They have the rank Admin Or Owner
     if (message.member.roles.find(r => r.name === "Admin") || msg.member.roles.find(r => r.name === "Owner")) {
 
 
@@ -128,7 +148,7 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
          * https://discord.js.org/#/docs/main/master/class/GuildMember?scrollTo=ban
          */
         member.ban({
-          reason: 'They were bad!',
+          reason: `${message.author.username} Banned ${user.tag}`,
         }).then(() => {
           // We let the message author know we were able to ban the person
           message.reply(`Successfully banned ${user.tag}`);
