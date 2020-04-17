@@ -97,11 +97,6 @@ bot.on("message", async message => {
     if (message.content == prefix) {
         justprefix = true;
     }
-    //this will 
-    if (command != `${prefix}${list.addwords}` && justprefix != false) {
-        message.channel.send("That is not a valid Command Please Do !help for a list of commands");
-        return;
-    }
     //this will print out rip
     if (command === `${prefix}rip`) {
         // Create the attachment using Attachment
@@ -341,7 +336,11 @@ message.author.send(helpEmbed).then(async (msg) => {
     }
 });
 });
-}	
+    }
+    if (justprefix != false) {
+        message.channel.send("That is not a valid Command Please Do !help for a list of commands");
+        return;
+    }
 
 });
 
