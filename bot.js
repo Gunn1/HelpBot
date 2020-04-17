@@ -56,10 +56,10 @@ try {
     });
 });
 bot.on("message", async message => {
-    if (message.content === `${prefix}rollup`) {
+    /*if (message.content === `${prefix}rollup`) {
         message.member.addRole('700492731683962950');
         console.log("rollingup");
-    }
+    }*/
     if (message.member.roles.find(r => r.name === "Mute")) {
         message.delete();
         message.author.send("Sorry You have been muted from chat")
