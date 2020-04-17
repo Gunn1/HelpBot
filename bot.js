@@ -93,11 +93,11 @@ bot.on("message", async message => {
         message.channel.send(embed);
     }
     justprefix = false;
+    //this will make it so if they just enter the prefix it will tell them they need a command
     if (message.content == prefix) {
-        message.channel.send("Please Enter A Command");
         justprefix = true;
     }
-
+    //this will 
     if (command != `${prefix}${list.addwords}` && justprefix != false) {
         message.channel.send("That is not a valid Command Please Do !help for a list of commands");
         return;
