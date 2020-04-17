@@ -3,6 +3,7 @@ const list = require("./lists.json");
 const Discord = require("discord.js");
 const prefix = botSettings.prefix;
 favemoji = null;
+const tyler = botSettings.tyler;
 const bot = new Discord.Client();
 const { Client, Attachment } = require('discord.js');
 //This Is called with !staff and Starts a Thread
@@ -11,8 +12,23 @@ const helpEmbed = new Discord.RichEmbed()
 .setTitle('Thread Created')
 .setDescription('Our Staff Team Will Get Back To You As Soon As Possible')
 .setTimestamp()
-.setFooter('To Close Thread Push The Lock Button', 'https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1024px-Flag_of_Germany.svg.png');
+    .setFooter('To Close Thread Push The Lock Button', 'https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1024px-Flag_of_Germany.svg.png');
+const rulesembed = new Discord.RichEmbed()
+    .setTitle('Rules')
+    .addField("\u200b","Welcome To the Pizza Server!")
+    .addField("\u200b", "Be sure to follow the server rules below:", null)
+    .addField("\u200b" ,"1. Be respectful of others, especially staff.", null)
+    .addField("\u200b", "2. No swearing, cursing, foul language, or sexual implications.")
+    .addField("\u200b", "3. Listen to staff. ")
+    .addField("\u200b", "4. No spam except for in pizza-spam.")
+    .addField("\u200b", "5. Love pizza!")
+    .addField("\u200b", "We hope you enjoy your time here. If you have any questions,")
+    .addField("\u200b", "do \"!help\" and our bot will respond to you.")
+    .addField("\u200b", "If you have suggestions,")
+    .addField("\u200b", "do \"`suggestion\" and our bot will send a form to you")
+    .setTimestamp();
 //This is Called to end a Thread
+
 const noEmbed = new Discord.RichEmbed()
 .setColor('#0099ff')
 .setTitle('Thread Closed')
@@ -32,14 +48,17 @@ try {
 	console.log(e.stack);
     }
     bot.on('guildMemberAdd', member => {
-        
+
         // Send the message, mentioning the member
-        bot.channels.get(`628712884746059796`).send(`Welcome to the server, ${member}`);
+        member.send(`Welcome ${member} Please read the rules`);
+        member.send(rulesembed);
+        member.addRole('700490085820399628');
     });
 });
 bot.on("message", async message => {
     if (message.content === `${prefix}rollup`) {
-        message.member.addRole('700501854664261652');
+        message.member.addRole('700492731683962950');
+        console.log("rollingup");
     }
     if (message.member.roles.find(r => r.name === "Mute")) {
         message.delete();
@@ -74,7 +93,6 @@ bot.on("message", async message => {
         message.channel.send(embed);
     }
     justprefix = false;
-
     if (message.content == prefix) {
         message.channel.send("Please Enter A Command");
         justprefix = true;
@@ -90,6 +108,9 @@ bot.on("message", async message => {
         const attachment = new Attachment('https://i.imgur.com/w3duR07.png');
         // Send the attachment in the message channel
         message.channel.send(attachment);
+    }
+    if (command === `${prefix}rules`) {
+        message.author.send(rulesembed);
     }
     // This will run if !avatar is entered 
     if (command === `${prefix}avatar`) {
@@ -265,6 +286,16 @@ bot.on("message", async message => {
     .setTimestamp()
     .setFooter('Generator Made By ShadowGunn', 'https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1024px-Flag_of_Germany.svg.png');
   message.channel.send(dogembed);
+    }
+    if (command === `${prefix}tyler`) {
+        let i = randomInt(0, 2);
+        const tylerembed = new Discord.RichEmbed()
+            .setColor('#0099ff')
+            .setTitle('Dog Fact')
+            .setDescription(list.tyler[i])
+            .setTimestamp()
+            .setFooter('Generator Made By ShadowGunn', 'https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1024px-Flag_of_Germany.svg.png');
+        message.channel.send(tylerembed);
     }
     if(command ===`${prefix}catfact`) {
    	let i = randomInt(0, 12);
