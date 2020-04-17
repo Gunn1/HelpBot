@@ -30,90 +30,98 @@ try {
 	 console.log(link);
 } catch(e) {
 	console.log(e.stack);
-}
+    }
+    bot.on('guildMemberAdd', member => {
+        
+        // Send the message, mentioning the member
+        bot.channels.get(`628712884746059796`).send(`Welcome to the server, ${member}`);
+    });
 });
 bot.on("message", async message => {
-if (message.member.roles.find(r => r.name === "Mute")) {
-	message.delete();
-	message.author.send("Sorry You have been muted from chat")
-}
-if (message.member.roles.find(r => r.name === "Mute")) return;
-	let messageArray = message.content.split(" ");
-	let command = messageArray[0];
-	args = messageArray.slice(1);
-	let num = messageArray[1];
-  let tran = messageArray.slice(0);
-  // This is so you can create a filter
-  /*if (message.content.includes("Enter Your Word Here")) {
-    message.delete();
-    message.channel.send("Please do not say that");  
-    
-  }*/
+    if (message.content === `${prefix}rollup`) {
+        message.member.addRole('700501854664261652');
+    }
+    if (message.member.roles.find(r => r.name === "Mute")) {
+        message.delete();
+        message.author.send("Sorry You have been muted from chat")
+    }
+    if (message.member.roles.find(r => r.name === "Mute")) return;
+    let messageArray = message.content.split(" ");
+    let command = messageArray[0];
+    args = messageArray.slice(1);
+    let num = messageArray[1];
+    let tran = messageArray.slice(0);
+    // This is so you can create a filter
+    /*if (message.content.includes("Enter Your Word Here")) {
+      message.delete();
+      message.channel.send("Please do not say that");  
+      
+    }*/
 
 
-  //this will make your code stop if it does not have a prifix
-	if(!command.startsWith(prefix)) return;
-  //This will print out the users info
-	if(command === `${prefix}userinfo`) {
-		let embed = new Discord.RichEmbed()
-			.setAuthor(message.author.username)
-			.setDescription("This is the user's info!")
-			.setColor("#0066ff")
-			.addField("Full Username", `${message.author.username}#${message.author.discriminator}`)
-			.addField("ID", message.author.id)
-			.addField("Created At", message.author.createdAt)
-			.setTimestamp();
-	message.channel.send(embed);
-}
-  justprefix = false;
+    //this will make your code stop if it does not have a prifix
+    if (!command.startsWith(prefix)) return;
+    //This will print out the users info
+    if (command === `${prefix}userinfo`) {
+        let embed = new Discord.RichEmbed()
+            .setAuthor(message.author.username)
+            .setDescription("This is the user's info!")
+            .setColor("#0066ff")
+            .addField("Full Username", `${message.author.username}#${message.author.discriminator}`)
+            .addField("ID", message.author.id)
+            .addField("Created At", message.author.createdAt)
+            .setTimestamp();
+        message.channel.send(embed);
+    }
+    justprefix = false;
 
-  if (message.content == prefix) {
-    message.channel.send("Please Enter A Command");
-    justprefix = true;
-  }
+    if (message.content == prefix) {
+        message.channel.send("Please Enter A Command");
+        justprefix = true;
+    }
 
-  if (command != `${prefix}${list.addwords}` && justprefix != false) {
-    message.channel.send("That is not a valid Command Please Do !help for a list of commands");
-    return;
-}
-  //this will print out rip
-	if (command === `${prefix}rip`) {
+    if (command != `${prefix}${list.addwords}` && justprefix != false) {
+        message.channel.send("That is not a valid Command Please Do !help for a list of commands");
+        return;
+    }
+    //this will print out rip
+    if (command === `${prefix}rip`) {
         // Create the attachment using Attachment
         const attachment = new Attachment('https://i.imgur.com/w3duR07.png');
         // Send the attachment in the message channel
         message.channel.send(attachment);
     }
     // This will run if !avatar is entered 
-	if (command === `${prefix}avatar`) {
-    // This will check to see if you have a avatar and run if you do
-    if(message.author.avatarURL === null) {
-      //This will send That you do not have a avatar
-      message.reply("Sorry you do not have a avatar please set one");
-    }
-    else {
-        // This will send the avatar to your channel
-    		message.reply(`This is your avatar ${message.author.avatarURL}`);
-    	}
+    if (command === `${prefix}avatar`) {
+        // This will check to see if you have a avatar and run if you do
+        if (message.author.avatarURL === null) {
+            //This will send That you do not have a avatar
+            message.reply("Sorry you do not have a avatar please set one");
+        }
+        else {
+            // This will send the avatar to your channel
+            message.reply(`This is your avatar ${message.author.avatarURL}`);
+        }
     }
     //This will Give you a help embed
-	if(command === `${prefix}help`) {
-		let helpmessage = new Discord.RichEmbed()
-			.setAuthor("Help")
-			.addField("!userinfo", `Will display your name ${message.author.username}`)
-			.addField("!staff", `Will Start A Thread`)
-			.addField("!rip", "will display rip")
-			.addField("!avatar", "Will display avatar")
-			.addField("!catfact", "Will display Fish fact")
-			.addField("!dogfact", "Will display Cat fact")
-			.setTimestamp();
-		message.channel.send(helpmessage);
-	}
+    if (command === `${prefix}help`) {
+        let helpmessage = new Discord.RichEmbed()
+            .setAuthor("Help")
+            .addField("!userinfo", `Will display your name ${message.author.username}`)
+            .addField("!staff", `Will Start A Thread`)
+            .addField("!rip", "will display rip")
+            .addField("!avatar", "Will display avatar")
+            .addField("!catfact", "Will display Fish fact")
+            .addField("!dogfact", "Will display Cat fact")
+            .setTimestamp();
+        message.author.send(helpmessage);
+    }
       // this will delete 100
     	if (command === `${prefix}purge`) {
         //Deletes 100 messages
          async function purge() {
             //This will check to see if you have a Admin Or Owner and if you do it will run the code in the {}
-            if (message.member.roles.find(r => r.name === "Admin") || message.member.roles.find(r => r.name === "Owner")) {
+             if (message.member.roles.find(r => r.name === "Pizza Admin") || message.member.roles.find(r => r.name === "Owner")) {
             //This gets all the messages in the channel
             const fetched = await message.channel.fetchMessages({limit: 100});
             message.channel.bulkDelete(fetched);
@@ -127,8 +135,8 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
     //This Will Ban users
 // if the message content starts with "!ban"
   if (message.content.startsWith(`${prefix}ban`)) {
-    //This will check if They have the rank Admin Or Owner
-    if (message.member.roles.find(r => r.name === "Admin") || msg.member.roles.find(r => r.name === "Owner")) {
+      //This will check if They have the rank Admin Or Owner
+      if (message.member.roles.find(r => r.name === "Pizza Admin") || message.member.roles.find(r => r.name === "Owner")) {
 
 
     // Assuming we mention someone in the message, this will return the user
@@ -169,15 +177,58 @@ if (message.member.roles.find(r => r.name === "Mute")) return;
       message.reply('You didn\'t mention the user to ban!');
     }
 }
-  }
+    }
+
+    // If the message content starts with "!kick"
+    if (message.content.startsWith('!kick')) {
+        // Assuming we mention someone in the message, this will return the user
+        // Read more about mentions over at https://discord.js.org/#/docs/main/master/class/MessageMentions
+        const user = message.mentions.users.first();
+        // If we have a user mentioned
+        if (user) {
+            // Now we get the member from the user
+            const member = message.guild.member(user);
+            // If the member is in the guild
+            if (member) {
+                /**
+                 * Kick the member
+                 * Make sure you run this on a member, not a user!
+                 * There are big differences between a user and a member
+                 */
+                member
+                    .kick('Optional reason that will display in the audit logs')
+                    .then(() => {
+                        // We let the message author know we were able to kick the person
+                        message.reply(`Successfully kicked ${user.tag}`);
+                    })
+                    .catch(err => {
+                        // An error happened
+                        // This is generally due to the bot not being able to kick the member,
+                        // either due to missing permissions or role hierarchy
+                        message.reply('I was unable to kick the member');
+                        // Log the error
+                        console.error(err);
+                    });
+            } else {
+                // The mentioned user isn't in this guild
+                message.reply("That user isn't in this guild!");
+            }
+            // Otherwise, if no user was mentioned
+        } else {
+            message.reply("You didn't mention the user to kick!");
+        }
+    }
 
     if(command === `${prefix}remove` && num === undefined) {
-      message.delete();
-      message.channel.send("Please Add a number after !remove ");
+        message.delete();
+        if (message.member.roles.find(r => r.name === "Pizza Admin") || message.member.roles.find(r => r.name === "Owner")) {
+
+            message.channel.send("Please Add a number after !remove ");
+        }
     }
     	if (command === `${prefix}remove` && num !== undefined) {
         async function clear() {
-        if (message.member.roles.find(r => r.name === "Admin") || message.member.roles.find(r => r.name === "Owner")) { 
+            if (message.member.roles.find(r => r.name === "Pizza Admin") || message.member.roles.find(r => r.name === "Owner")) { 
             message.delete();
             const fetched = await message.channel.fetchMessages({limit: num});
             message.channel.bulkDelete(fetched);
