@@ -137,7 +137,7 @@ bot.on("message", async message => {
         //Deletes 100 messages
          async function purge() {
             //This will check to see if you have a Admin Or Owner and if you do it will run the code in the {}
-             if (message.member.roles.find(r => r.name === "Pizza Admin") || message.member.roles.find(r => r.name === "Owner")) {
+             if (message.member.roles.find(r => r.name === "Pizza Admin") || message.member.roles.find(r => r.name === "Owner") || message.member.roles.find(r => r.name === "Admin") ) {
             //This gets all the messages in the channel
             const fetched = await message.channel.fetchMessages({limit: 100});
             message.channel.bulkDelete(fetched);
