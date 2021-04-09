@@ -237,14 +237,14 @@ bot.on("message", async message => {
 
     if(command === `${prefix}remove` && num === undefined) {
         message.delete();
-        if (message.member.roles.find(r => r.name === "Pizza Admin") || message.member.roles.find(r => r.name === "Owner")) {
+        if (message.member.roles.find(r => r.name === "Pizza Admin") || message.member.roles.find(r => r.name === "Owner") || message.member.roles.find(r => r.name === "Admin")) {
 
             message.channel.send("Please Add a number after !remove ");
         }
     }
     	if (command === `${prefix}remove` && num !== undefined) {
         async function clear() {
-            if (message.member.roles.find(r => r.name === "Pizza Admin") || message.member.roles.find(r => r.name === "Owner")) { 
+            if (message.member.roles.find(r => r.name === "Pizza Admin") || message.member.roles.find(r => r.name === "Owner") || message.member.roles.find(r => r.name === "Admin")) { 
             message.delete();
             const fetched = await message.channel.fetchMessages({limit: num});
             message.channel.bulkDelete(fetched);
